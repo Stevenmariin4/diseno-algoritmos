@@ -1,3 +1,4 @@
+from multiprocessing.dummy import Array
 from xmlrpc.client import Boolean
 import matplotlib.pyplot as plt
 from matplotlib import cm
@@ -37,7 +38,25 @@ class Image:
             print(name)    
             pass    
 
+    def converImageBlackWhite(self,matriz:Array):
+        "Method Calculate moduler corners number in matriz"
+        try:
+            n = matriz.shape[0]
+            m = matriz.shape[1]
+            matrizNearby = []
+            for i in range(n):
+                matrizNearby.append([])
+                for j in range(m):
+                    matrizNearby[i].append(0) if matriz[i][j] < 127 else  matrizNearby[i].append(1)
+            print("Process convert image escale black withe successfull")             
+            return matrizNearby
+        except NameError as name:            
+            print("Has ocurred error", name)
+            pass                         
+     
+
     def calculatePixeles(self):
+        "Method Calculate number pixel in picture"
         try:
             image= self.returnImage(True)
             for i in range(image.shape[0]):
